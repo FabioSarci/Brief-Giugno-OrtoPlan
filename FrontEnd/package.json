@@ -1,0 +1,27 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tw": "npx tailwindcss -i ./public/style/input.css -o ./public/style/output.css --watch",
+    "dev": "nodemon ./src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^3.4.3",
+    "daisyui": "^4.10.1",
+    "nodemon": "^3.1.0",
+    "on": "^1.3.0"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "moment": "^2.30.1",
+    "validate.js": "^0.13.1",
+    "validatejs": "^0.0.2"
+  }
+}
