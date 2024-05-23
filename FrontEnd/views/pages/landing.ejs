@@ -1,12 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light" style="font-family: stoke;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>landing</title>
     <link rel="stylesheet" href="/style/output.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-    hello world!
+    <div class="giacomo">
+    <header class="z-20 top-0 left-0 fixed w-full bg-green-700 shadow-2xl">
+        <div class="flex justify-between md:gap-4 items-center p-4">
+            <h1 class="text-white text-4xl md:ml-10">
+                OrtoPlan
+            </h1>
+            <div class="md:mr-10">
+                <ul class="flex gap-4">
+                    <li>
+                        <button onclick="openRegisterModal()" class="btn btn-outline text-white border-white">Sign up</button>
+                    </li>
+                    <li>
+                        <button onclick="openLoginModal()" class="btn btn-outline text-white border-white">Sign in</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero mt-14 flex flex-col">
+        <div class="">
+            <img class="z-10" src="/assets/logo.png" alt="">
+        </div>
+    </div>
+    <div data-aos="fade-up" class="z-0 w-full bg-green-700 border-2 border-green-800 shadow-2xl items-center text-center">
+        <div>
+            <h1 class="p-4 text-white text-2xl md:text-4xl">Benvenuto nel mio progetto!</h1>
+        </div>
+    </div>
+    <div data-aos="fade-up" class="flex gap-4 p-4 justify-center items-center text-center">
+        <div class="p-4 bg-green-700/80 border-2 border-green-800">
+            <h2 class="text-white md:text-4xl text-2xl">
+                Nella mia web app potrai Gestire e Curare le tue coltivazioni perosnale
+            </h2>
+        </div>
+    </div>
+
+    <div class="border-2 border-green-700"></div>
+    <div class="flex p-4 justify-center gap-2 items-center">
+        <div data-aos="zoom-in-up" class="w-full">
+            <img class="w-full" src="/assets/a1.png" alt="">
+        </div>
+            <div data-aos="zoom-in-up" class="p-4 bg-green-700/80 border-2 border-green-800 rounded-xl text-center">
+                <h2 class="text-white text-2xl md:text-4xl">
+                    Organizza delle attivita che ti supporteranno nella cura del tuo orto
+                </h2>
+        </div>
+    </div>
+    <div class="flex p-4 justify-center gap-2 items-center w-full">
+        <div data-aos="zoom-in-up" class="w-full p-4 bg-green-700/80 border-2 border-green-800 rounded-xl text-center">
+            <h2 class="text-white text-2xl md:text-4xl">
+                Attento alla pioggia! Il nostro sistema prevede le previsioni del tempo, cosi potrai proteggere le tue coltivazioni
+            </h2>
+        </div>
+        <div data-aos="zoom-in-up" class="w-full">
+            <img class="w-full" src="/assets/a2.png" alt="">
+        </div>
+    </div>
+
+    <div data-aos="fade-up"  class="bg-green-700 border-2 border-green-800 items-center text-center">
+        <h1 class="text-white text-2xl md:text-4xl mt-10">
+            Cosa aspetti? Inizia a Coltivare!
+        </h1>
+            <ul class="flex gap-4 justify-center p-4">
+                <li>
+                    <button onclick="openCreateUserModal()" class="btn btn-outline text-white border-white">Sign up</button>
+                </li>
+                <li>
+                    <button onclick="openCreateUserModal()" class="btn btn-outline text-white border-white">Sign in</button>
+                </li>
+            </ul>
+    </div>
+    </div>
+
+    <!-- register modal -->
+    <dialog id="registerModal" class="modal">
+        <!-- modal box -->
+        <div class="flex flex-col modal-box gap-4">
+            <div class="flex flex-col gap-4">
+                <h3 class="font-bold text-lg">Login</h3>
+                <form id="registerForm" class="flex flex-col gap-4">
+                    <input name="firstName" placeholder="Nome" type="text" class="input input-bordered w-full">
+                    <input name="lastName" placeholder="Cognome" type="text" class="input input-bordered w-full">
+                    <input name="email" placeholder="Email" type="text" class="input input-bordered w-full">
+                    <input name="password" placeholder="Password" type="password" class="input input-bordered w-full">
+                    <input name="conferma" placeholder="Conferma Password" type="password" class="input input-bordered w-full">
+                    <input name="datanascita" placeholder="DataNascita" type="date" class="input input-bordered w-full">
+                    <div class="modal-action">
+                        <button type="button" class="btn border-green-700 text-green-700" onclick="registerModal.close()">Chiudi</button>
+                        <button class="btn border-green-700 text-green-700 btn-outline">Salva</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- backdrop -->
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
+
+    <!-- register modal -->
+    <dialog id="loginModal" class="modal">
+        <!-- modal box -->
+            <div class="flex modal-box gap-4">
+                <div class="border-r-2 border-green-700">
+                    <img class="w-80" src="/assets/logo.png" alt="">
+                </div>
+                <div class="w-full flex flex-col gap-4">
+                    <h3 class="font-bold text-lg">Login</h3>
+                    <form id="loginForm" class="flex flex-col gap-4">
+                        <input name="email" placeholder="Email" type="text" class="input input-bordered w-full">
+                        <input name="password" placeholder="Password" type="password" class="input input-bordered w-full">
+                        <a href="#">password dimenticata?</a>
+                        <div class="modal-action">
+                            <button type="button" class="btn border-green-700 text-green-700" onclick="registerModal.close()">Chiudi</button>
+                            <button class="btn border-green-700 text-green-700 btn-outline">Salva</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <!-- backdrop -->
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+    <script src="./scripts/moment.js"></script>
+    <script src="./scripts/user.register.js"></script>
 </body>
 </html>

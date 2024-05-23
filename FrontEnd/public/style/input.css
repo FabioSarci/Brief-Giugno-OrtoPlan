@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.giacomo{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.giacomo::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url(../assets/sfondo.jpg);
+  filter: blur(2px);
+  opacity: 0.5;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -99999;
+}

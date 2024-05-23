@@ -3,6 +3,7 @@ import 'dotenv/config';
 import userRouting from "./routing/user.routing.js";
 import authRouting from "./routing/auth.routing.js";
 import cors from 'cors';
+import moment from 'moment';
 
 const app = express();
 app.use(express.json()); 
@@ -14,7 +15,7 @@ app.use(cors({
 }));
 
 
-
+userRouting(app);
 
 
 app.listen(process.env.PORT, () => {

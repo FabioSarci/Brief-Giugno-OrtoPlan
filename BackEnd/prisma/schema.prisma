@@ -6,3 +6,81 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+//tabella User
+model User{
+  id Int @id @default(autoincrement())
+  firstName String
+  lastName String
+  email String @unique
+  password String
+  datanascita DateTime
+  piantagioni Piantagione[]
+}
+
+//Tabella Pianta
+model Pianta{
+  id Int @id @default(autoincrement())
+  nome String
+  tipologia TipoPianta
+  stagione_semina Stagione
+  stagione_raccolto Stagione
+  temperatura_ottimale String
+  piantagioni Piantagione[]
+}
+
+enum TipoPianta{
+  Ortaggio
+  Fiore
+}
+
+enum Stagione{
+  Autunno
+  Inverno
+  Primavera
+  Estate
+}
+
+//Tabella Piantagione
+model Piantagione{
+  id Int @id @default(autoincrement())
+  nome String 
+  descrizione String
+  datacreazione DateTime
+  comuni Comune @relation(fields: [cap], references: [cap])
+  cap String
+  utente User @relation(fields: [idutente], references: [id])
+  idutente Int
+  pianta Pianta @relation(fields: [idpianta], references: [id])
+  idpianta Int
+  attivita Attivita[]
+}
+
+//Tabella Attivita
+model Attivita{
+  id Int @id @default(autoincrement())
+  nome String
+  tipologia TipoAttivita
+  ripetizione String
+  piantagione Piantagione @relation(fields: [idpiantagione],references: [id])
+  idpiantagione Int
+}
+
+enum TipoAttivita{
+  Semina
+  Irrigazione
+  Concimazione
+  Diserbo
+  Potatura
+  Raccolto
+}
+
+
+//Tabella Comune
+model Comune{
+  cap String @id
+  denominazione String
+  lat Float
+  lon Float
+  piantagioni Piantagione[]
+}
