@@ -11,7 +11,7 @@ export default function authRouting(app){
             }
         });
         if(!user){
-            res.status = 422;
+            res.status(422);
             res.json({message: 'Email o Password errati'});
             return
         }

@@ -1,6 +1,6 @@
 import express from "express";
 import 'dotenv/config';
-import userRouting from "./routing/user.routing.js";
+import userRouting from "./routing/create.routing.js";
 import authRouting from "./routing/auth.routing.js";
 import cors from 'cors';
 import moment from 'moment';
@@ -16,6 +16,7 @@ app.use(cors({
 
 
 userRouting(app);
+authRouting(app);
 
 
 app.listen(process.env.PORT, () => {

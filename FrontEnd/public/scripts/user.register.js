@@ -12,12 +12,12 @@ const registerModal = document.querySelector('#registerModal');
 registerForm.addEventListener('submit',(e) =>{
   e.preventDefault();
 
-  document.querySelectorAll('error-message').forEach(element =>{
+  document.querySelectorAll('.error-message').forEach(element =>{
     element.remove();
-  });
+  })
   document.querySelectorAll('.input-error').forEach(element =>{
     element.classList.remove('input-error');
-  });
+  })
 
   const firstName = e.target[0].value;
   const lastName = e.target[1].value;
@@ -50,7 +50,7 @@ registerForm.addEventListener('submit',(e) =>{
             message: 'Campo Richiesto'    
         },
         length: {minimum: 5,
-            tooShort: "deve avere minimo 5 Caratteri!"
+            tooShort: " deve avere minimo 5 Caratteri!"
         },
     },
     lastName:{
@@ -58,13 +58,13 @@ registerForm.addEventListener('submit',(e) =>{
             message: 'Campo Richiesto'    
         },
         length: {minimum: 5,
-            tooShort: "deve avere minimo 5 Caratteri!"
+            tooShort: " deve avere minimo 5 Caratteri!"
         },
     },
     email:{
         email:{
             email :true,
-            message: 'Inserisci un indirizzo Email valido'
+            message: 'Non Valida'
         }
     },
     conferma:{
@@ -136,14 +136,3 @@ function setErr(el,messages){
       el.parentNode.insertBefore(p,el.nextSibling);
   })
 }
-
-
-let loginMod;
-function openLoginModal() {
-    loginMod = undefined;
-    loginModal.showModal();
-    loginForm.reset();
-  }
-
-const loginForm = document.querySelector('#loginForm');
-const loginModal = document.querySelector('#loginModal');
