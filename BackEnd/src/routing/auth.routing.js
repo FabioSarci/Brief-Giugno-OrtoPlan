@@ -1,5 +1,6 @@
 import prisma from "../../db/prisma.js";
 import jwt from 'jsonwebtoken';
+import isLoggedIn from '../middleware/isLoggedIn.js';
 
 //login
 export default function authRouting(app){

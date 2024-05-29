@@ -1,0 +1,29 @@
+</div>
+</div> 
+<div class="drawer-side">
+    <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label> 
+    <ul class="menu p-4 w-80 min-h-full bg-accent text-white">
+      <!-- Sidebar content here -->
+      <div class="items-center justify-center">
+          <a href="http://localhost:3000/OrtoPlan"><img height="100px" width="100px" src="/assets/logo.png" alt=""></a>
+      </div>
+      <li class="border-t-white border-t-2"><button onclick="window.location.href = '/OrtoPlan/giardino/'+ userId">Home</button></li>
+      <li><button onclick="coltivazioni()">Le Tue Coltivazioni</button></li>
+      <li><button onclick="attivita()">Le Tue Attivita</button></li>
+      <li><button onclick="previsioni()">Previsioni della Settimana</button></li>
+      <li class="mt-auto border-t-2 border-t-white"><a href="">Profilo</a></li>
+      <li><a href="">Notifiche</a></li>
+      <li><button onclick="logout()">Esci</button></li>
+    </ul>
+    
+  </div>
+</div>
+</div>
+</div>
+<script>
+const userId = '<%= userId %>';
+console.log(userId);
+</script>
+<script src="/scripts/giardino.js"></script>
+</body>
+</html>

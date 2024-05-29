@@ -8,9 +8,13 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-      'tumadre': '#c2410c', 
+      'tumadre': '#c2410c',
+      'sito': '#3d954d',
     },
   },
+  },
+  daisyui: {
+    themes: ["light", "dark", "emerald","garden"],
   },
   plugins: [require("daisyui")],
 }

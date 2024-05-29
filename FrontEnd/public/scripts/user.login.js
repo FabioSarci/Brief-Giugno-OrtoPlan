@@ -1,10 +1,15 @@
 const loginForm = document.querySelector('#loginForm');
 const loginModal = document.querySelector('#loginModal');
 let loginMod;
+const user = JSON.parse(localStorage.getItem('user'));
 
 function openLoginModal() {
     loginMod = undefined;
-    loginModal.showModal();
+    if(localStorage.getItem('user')){
+        window.location.href = '/OrtoPlan/giardino/'+ user.id;
+    }
+    else{
+        loginModal.showModal();
     loginForm.reset();
     document.querySelectorAll('.error-message').forEach(element =>{
         element.remove();
@@ -12,6 +17,7 @@ function openLoginModal() {
     document.querySelectorAll('.input-error').forEach(element =>{
         element.classList.remove('input-error');
     })
+    }
   }
 
 
@@ -28,7 +34,6 @@ loginForm.addEventListener('submit', async(e) =>{
     const email = e.target.children[0].value;
     const password = e.target.children[1].value;
 
-    console.log({email, password});
 
     const res = await fetch('http://localhost:8000/login',{
         body: JSON.stringify({
@@ -41,7 +46,7 @@ loginForm.addEventListener('submit', async(e) =>{
         }
     });
 
-    if(res.status != 200){
+    if(res.status == 422){
         const el = document.querySelector('#p');
         const message = {errore : "Credenziali errate!"};
         setErr(el, JSON.stringify(message.errore));
@@ -50,10 +55,12 @@ loginForm.addEventListener('submit', async(e) =>{
 
     const data = await res.json();
 
+    
+
     localStorage.setItem('user', JSON.stringify(data.user));
     localStorage.setItem('token', JSON.stringify(data.token));
 
-    window.location.href = '/OrtoPlan/giardino';
+    window.location.href = '/OrtoPlan/giardino/'+ +data.user.id;
 
 });
 

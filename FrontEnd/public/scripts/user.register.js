@@ -92,6 +92,7 @@ if(validation){
 const url = loginMod
 ? "http://localhost:8000/check/" + loginMod.id
 : "http://localhost:8000/register";
+
 fetch(url, {
 method: registerMod ? "PUT" : "POST",
 body: JSON.stringify({
@@ -114,6 +115,7 @@ headers: {
     return
   }
   registerModal.close();
+  alertSuccess();
 
 });
 
@@ -136,3 +138,17 @@ function setErr(el,messages){
       el.parentNode.insertBefore(p,el.nextSibling);
   })
 }
+
+function alertSuccess(){
+  document.querySelectorAll('#success').forEach(element =>{
+    element.classList.remove('hidden');
+  });
+
+  return new Promise((resolve) =>{
+    setTimeout(() =>{
+      resolve(document.querySelectorAll('#success').forEach(element =>{
+        element.classList.add('hidden');
+      }))
+    },10000);
+  });
+};

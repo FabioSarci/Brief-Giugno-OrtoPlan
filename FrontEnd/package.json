@@ -18,6 +18,7 @@
     "tailwindcss": "^3.4.3"
   },
   "dependencies": {
+    "@glidejs/glide": "^3.6.1",
     "aos": "^2.3.4",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
