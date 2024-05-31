@@ -20,7 +20,7 @@ export default function authRouting(app){
             user,
             process.env.JWT_SECRET,
             {
-                expiresIn: '1h'
+                expiresIn: '30m'
             }
         );
 

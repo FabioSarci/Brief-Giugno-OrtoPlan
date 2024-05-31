@@ -1,14 +1,76 @@
 <%- include('giardino-template') %>
 
-<div class="text-accent text-2xl font-semibold">
-    <h2>
-        Previsioni del giorno
+<!-- Page content here -->
+<div class="items-center flex gap-4 mt-8">
+    <h1 class="text-accent font-bold lg:text-4xl text-xl">
+        Buongiorno, <span id="user" class="loading loading-spinner loading-sm"></span>!
     </h1>
+    <img height="30px" width="30px" src="/assets/emoji1.svg" alt="">
 </div>
-<div id="previsionigiorno" class="flex justify-normal items-center gap-4">
+<div class="divider divider-accent"></div>
+<label for="my-drawer-2" class="drawer-button lg:hidden toast toast-start toast-top mt-8"><img src="/assets/burger.svg" alt=""></label>
+<div class="flex flex-col gap-8 h-full p-4 w-[100%]">
+    <div class="text-accent text-2xl font-semibold flex justify-between items-center">
+        <h2>
+            Previsioni del giorno <span id="today" class="loading loading-spinner loading-sm"></span>
+        </h2>
+        <div class="gap-2">
+            <form id="cityForm" class="flex gap-2">
+                    <img src="/assets/meteo/map.svg" alt="">
+                    <input name="nomecitta" placeholder="roma"  type="text" class="input input-bordered input-sm">
+                    <button type="submit" class="btn btn-sm border-accent text-accent btn-outline">cerca</button>
+            </form>
+        </div>
+    </div>
+    <section id="splide" class="splide" aria-label="Splide Basic HTML Example">
+        <div class="splide__track">
+                <div id="previsionigiorno" class="splide__list text-center lg:max-h-32 min-h-20 gap-4">
 
+                </div>
+        </div>
+    </section>
+    <div class="divider divider-accent w-full"></div>
+    
+    <div class="text-accent text-2xl font-semibold">
+        <h2>
+            Le Tue Prossime Attivita
+        </h2>
+    </div>
+    <section id="splide2" class="splide" aria-label="Splide Basic HTML Example">
+        <div class="splide__track">
+                <div class="splide__list">
+                    <div class="splide__slide">TEMPERATURA 00:00</div>
+                    <div class="splide__slide">TEMPERATURA 01:00</div>
+                    <div class="splide__slide">TEMPERATURA 02:00</div>
+                </div>
+        </div>
+    </section>
+    
+    <div class="text-accent text-2xl font-semibold">
+        <h2>
+            Le Piantagioni Prossime al Raccolto
+        </h1>
+    </div>
+    <section id="splide3" class="splide" aria-label="Splide Basic HTML Example">
+        <div class="splide__track">
+                <div class="splide__list">
+                    <div class="splide__slide">TEMPERATURA 00:00</div>
+                    <div class="splide__slide">TEMPERATURA 01:00</div>
+                    <div class="splide__slide">TEMPERATURA 02:00</div>
+                </div>
+        </div>
+    </section>
+</div>
 </div>
 
 <%- include('giardino-template2') %>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script> 
+const isToday = moment().format('ddd, DD-MM-YYYY');
+const span = document.querySelector('#today');
+span.textContent = isToday;
+span.classList.remove('loading','loading-spinner','loading-sm');
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 <script src="/scripts/previsioni.giorno.js"></script>

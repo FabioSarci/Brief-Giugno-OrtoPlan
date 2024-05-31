@@ -39,3 +39,12 @@ background-size: cover;
 background-repeat: no-repeat;
 z-index: -99999;
 }
+
+/* @font-face{
+  font-family: 'myfont';
+  src: url(/fonts/RedditMono-Black.ttf);
+}
+
+body {
+  font-family: 'myfont';
+} */

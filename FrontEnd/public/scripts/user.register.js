@@ -14,10 +14,10 @@ registerForm.addEventListener('submit',(e) =>{
 
   document.querySelectorAll('.error-message').forEach(element =>{
     element.remove();
-  })
+  });
   document.querySelectorAll('.input-error').forEach(element =>{
     element.classList.remove('input-error');
-  })
+  });
 
   const firstName = e.target[0].value;
   const lastName = e.target[1].value;
