@@ -58,7 +58,7 @@ loginForm.addEventListener('submit', async(e) =>{
     
 
     localStorage.setItem('user', JSON.stringify(data.user));
-    localStorage.setItem('token', JSON.stringify(data.token));
+    localStorage.setItem('token', data.token);
 
     window.location.href = '/OrtoPlan/giardino/'+ +data.user.id;
 

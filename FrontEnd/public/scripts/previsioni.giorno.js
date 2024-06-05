@@ -75,7 +75,6 @@ function meteo(lat,lon){
     return res.json();
 })
 .then((data) => {
-    console.log(data);
     data.hourly.time.forEach(element => {
         orario = {
             ora: element,
@@ -132,20 +131,23 @@ function meteo(lat,lon){
             // Crea un nuovo div
             let newDiv = document.createElement('div');
             // Aggiungi le classi al div
-            newDiv.className = 'splide__slide border-2 border-accent rounded-xl justify-center items-center lg:max-w-72 max-w-46 p-4';
+            newDiv.className = 'splide__slide border-2 border-accent rounded-xl justify-center lg:max-w-72 max-w-80 p-2';
             // Aggiungi contenuto al div (opzionale)
             newDiv.innerHTML = `
-                    <div class='flex justify-between items-center border-b border-b-accent pb-2'>
-                        <p class='text-xl'>${moment(element.ora).format('LT')}</p>
-                        <img src="/assets/meteo/${immagine}" alt="">
-                    </div>
-                    <p class='mt-1 text-start'>${element.codice}</p>
-                    <div class='flex justify-between items-center'>
-                        <p class=' text-2xl'>${element.gradi}°C</p>
-                        <p>Vento: ${element.wind} km/h</p>
+                    <div class='flex lg:flex-col w-full gap-1 lg:gap-0'>
+                        <div class='flex justify-between items-center lg:border-b lg:border-b-accent lg:pb-2 gap-1'>
+                            <p class='lg:text-xl'>${moment(element.ora).format('LT')}</p>
+                            <img src="/assets/meteo/${immagine}" alt="">
+                        </div>
+                        <div class='flex items-center'>
+                            <p class='mt-1 lg:text-start text-sm'>${element.codice}</p>
+                        </div>
+                        <div class='flex justify-between items-center'>
+                            <p class=' text-2xl'>${element.gradi}°C</p>
+                            <p>Vento: ${element.wind} km/h</p>
+                        </div>
                     </div>
             `;
-            // Aggiungi il nuovo div come figlio dell'elemento con id previsionigiorno
             const orattuale = JSON.parse(moment().format('H'));
             elemento.appendChild(newDiv);
             new Splide( '#splide',
@@ -153,10 +155,8 @@ function meteo(lat,lon){
             type: 'slide',
             rewind: true,
             rewindByDrag: true,
-            width: '100%',
             gap: '1rem',
             start: orattuale,
-            perPage: 3,
             perMove: 1,
             focus:'center',
             pagination: false

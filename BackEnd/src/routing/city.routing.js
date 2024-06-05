@@ -15,5 +15,15 @@ export default function cityRouting(app){
             return
         }
         return res.json(city);
-    } )
+    } );
+
+    app.get('/city',async (req,res) => {
+        const cities = await prisma.comune.findMany();
+        if(!cities){
+            res.status(422);
+            res.json({message: 'Non ci sono Citta'});
+            return
+        }
+        return res.json(cities);
+    } );
 }

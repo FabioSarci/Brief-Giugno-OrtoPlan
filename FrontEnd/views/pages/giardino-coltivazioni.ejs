@@ -1,7 +1,47 @@
 <%- include('giardino-template') %>
 
-<div>
-    coltivazioni
+<div class="flex items-center justify-between w-full">
+    <h2 class="text-accent font-bold lg:text-2xl text-xl">
+        Le tue Coltivazioni
+    </h2>
+    <button onclick="openCreateModal()" class="btn btn-sm border-accent text-accent">Nuova</button>
+</div>
+<div id="tabella" class="grid lg:grid-cols-3 grid-cols-2 max-w w-full gap-4 p-4">
+
 </div>
 
+</div>
+
+
+<!-- createColtivazione modal -->
+<dialog id="createModal" class="modal">
+    <!-- modal box -->
+    <div class="flex flex-col modal-box gap-4">
+        <div class="flex flex-col gap-4">
+            <h3 class="font-bold text-lg text-accent">Nuova Coltivazione</h3>
+            <form id="createForm" class="flex flex-col gap-4">
+                <input name="nome" placeholder="Nome" type="text" class="input input-bordered w-full">
+                <input name="descrizione" placeholder="Descrizione" type="text" class="input input-bordered w-full">
+                <select id="cityList" name="cap" placeholder="Cap" type="text" class="select select-bordered w-full">
+                    <option value="">Citta</option>
+                </select>
+                <select id="plantList" name="pianta" placeholder="Pianta" type="text" class="select select-bordered w-full">
+                    <option value="">Pianta</option>
+                </select>
+                <div class="modal-action">
+                    <button type="button" class="btn border-accent text-accent" onclick="createModal.close()">Chiudi</button>
+                    <button type="submit" class="btn border-accent text-accent btn-outline">Salva</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- backdrop -->
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="/scripts/coltivazioni.js"></script>
 <%- include('giardino-template2') %>

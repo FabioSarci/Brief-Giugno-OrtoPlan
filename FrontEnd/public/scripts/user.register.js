@@ -4,7 +4,7 @@ function openRegisterModal() {
     registerMod = undefined;
     registerModal.showModal();
     registerForm.reset();
-  }
+}
 
 const registerForm = document.querySelector('#registerForm');
 const registerModal = document.querySelector('#registerModal');

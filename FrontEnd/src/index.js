@@ -19,14 +19,16 @@ app.get('/Ortoplan/giardino/coltivazioni/:id',(req,res) =>{
     res.render('pages/giardino-coltivazioni',{userId: +req.params.id})
 })
 
-app.get('/Ortoplan/giardino/attivita/:id',(req,res) =>{
-    res.render('pages/giardino-attivita',{userId: +req.params.id})
-})
-
 app.get('/Ortoplan/giardino/previsioni/:id',(req,res) =>{
     res.render('pages/giardino-previsioni',{userId: +req.params.id})
 })
 
+app.get('/OrtoPlan/giardino/coltivazioni/piantagione/:userid/:piantagioneid',(req,res) =>{
+    res.render('pages/piantagione',{
+        userId: +req.params.userid,
+        piantagioneId: +req.params.piantagioneid
+    })
+})
 
 
 app.listen(3000);

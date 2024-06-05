@@ -62,6 +62,7 @@ model Attivita{
   nome String
   tipologia TipoAttivita
   ripetizione String
+  data DateTime
   piantagione Piantagione @relation(fields: [idpiantagione],references: [id])
   idpiantagione Int
 }

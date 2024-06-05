@@ -9,9 +9,20 @@
     <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
 
 </head>
-    <body class="drawer lg:drawer-open bg-white">
+    <body>
+        <div class="drawer lg:drawer-open bg-white">
             <input id="my-drawer-2" type="checkbox" class="drawer-toggle"/>
-            <div class="drawer-content flex flex-col items-center justify-center min-h-screen lg:items-start lg:justify-start p-4">
+            <div class="drawer-content flex flex-col items-center min-h-screen lg:items-start lg:justify-start p-4">
+                <!-- Page content here -->
+                <div class="items-center flex justify-between gap-4 mt-8">
+                    <label for="my-drawer-2" class="drawer-button lg:hidden"><img src="/assets/burger.svg" alt=""></label>
+                    <h1 class="text-accent font-bold lg:text-4xl text-lg">
+                        Buongiorno, <span id="user" class="loading loading-spinner loading-sm"></span>!
+                    </h1>
+                    <img height="30px" width="30px" src="/assets/emoji1.svg" alt="">
+                </div>
+                <div class="divider divider-accent"></div>
+                
               
 
             

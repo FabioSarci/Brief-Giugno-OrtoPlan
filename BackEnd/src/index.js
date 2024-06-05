@@ -3,6 +3,8 @@ import 'dotenv/config';
 import userRouting from "./routing/create.routing.js";
 import authRouting from "./routing/auth.routing.js";
 import cityRouting from "./routing/city.routing.js";
+import plantRouting from "./routing/plant.routing.js";
+import activityRouting from "./routing/activity.routing.js";
 import cors from 'cors';
 import moment from 'moment';
 
@@ -19,6 +21,8 @@ app.use(cors({
 userRouting(app);
 authRouting(app);
 cityRouting(app);
+plantRouting(app);
+activityRouting(app);
 
 
 app.listen(process.env.PORT, () => {

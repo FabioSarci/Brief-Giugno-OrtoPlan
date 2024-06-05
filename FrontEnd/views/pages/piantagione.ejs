@@ -1,0 +1,114 @@
+<%- include('giardino-template') %>
+
+<div class="flex flex-col items-center text-center w-full h-full shadow-2xl">
+    <div class="flex justify-between items-center w-full p-4">
+        <h1 id="titolo" class="text-4xl text-accent font-bold">
+        </h1>
+        <div class="flex justify-center items-center gap-1">
+            <button class="btn border-accent text-accent" onclick="openEditModal()">Modifica</button>
+            <button class="btn border-accent text-accent" onclick="openDeleteModal()">Elimina</button>
+        </div>
+    </div>
+    <div id="caratteristiche" class="grid grid-cols-2 p-8 w-full text-xl">
+
+    </div>
+
+    <section id="splide" class="splide p-4 w-full" aria-label="Splide Basic HTML Example">
+        <div class="splide__track">
+                <div id="attivita" class="splide__list text-center lg:max-h-32 min-h-20 w-full">
+
+                </div>
+        </div>
+    </section>
+
+</div>
+
+</div>
+
+<!-- modificaColtivazione modal -->
+<dialog id="editModal" class="modal">
+    <!-- modal box -->
+    <div class="flex flex-col modal-box gap-4">
+        <div class="flex flex-col gap-4">
+            <h3 class="font-bold text-lg text-accent">Modifica Coltivazione</h3>
+            <form id="editForm" class="flex flex-col gap-4">
+                <input name="nome" value="" placeholder="Nome" type="text" class="input input-bordered w-full"/>
+                <input name="descrizione" value="" placeholder="Descrizione" type="text" class="input input-bordered w-full"/>
+                <select id="cityList" name="cap" placeholder="Cap" type="text" class="select select-bordered w-full">
+                    <option value="">Citta</option>
+                </select>
+                <select id="plantList" name="pianta" placeholder="Pianta" type="text" class="select select-bordered w-full">
+                    <option value="">Pianta</option>
+                </select>
+                <div class="modal-action">
+                    <button type="button" class="btn border-accent text-accent btn-outline" onclick="editModal.close()">Chiudi</button>
+                    <button type="submit" class="btn border-accent text-accent btn-outline">Salva</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- backdrop -->
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>
+
+<!-- eliminaColtivazione modal -->
+<dialog id="deleteModal" class="modal">
+    <!-- modal box -->
+    <div class="flex flex-col modal-box gap-4">
+        <div class="flex flex-col gap-4">
+            <h3 class="font-bold text-lg text-accent">Elimina Coltivazione</h3>
+                <h4>Sei Sicuro di vole Eliminare Questa Coltivazione?</h4>
+                <div class="modal-action">
+                    <button type="button" class="btn border-accent text-accent btn-outline" onclick="deletetModal.close()">Chiudi</button>
+                    <button type="button" class="btn border-accent text-accent btn-outline" onclick="deleteColtivazione()">Elimina</button>
+                </div>
+        </div>
+    </div>
+    <!-- backdrop -->
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>
+
+<!-- createAttivita modal -->
+<dialog id="createActivityModal" class="modal">
+    <!-- modal box -->
+    <div class="flex flex-col modal-box gap-4">
+        <div class="flex flex-col gap-4">
+            <h3 class="font-bold text-lg text-accent">Nuova Attivita</h3>
+            <form id="createActivityForm" class="flex flex-col gap-4">
+                <input name="nome" placeholder="Nome" type="text" class="input input-bordered w-full">
+                <select id="typeList" name="tipologia" placeholder="Tipologia" type="text" class="select select-bordered w-full"> 
+                </select>
+                <select id="repeatList" name="ripetizione" placeholder="Ripetizione" type="text" class="select select-bordered w-full">
+                </select>
+                <input type="date" name="data" placeholder="data" class="input input-bordered w-full"/>
+                <div class="modal-action">
+                    <button type="button" class="btn border-accent text-accent btn-outline" onclick="createActivityModal.close()">Chiudi</button>
+                    <button type="submit" class="btn border-accent text-accent btn-outline">Salva</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- backdrop -->
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>
+
+
+
+<div id="success" class="toast z-50 hidden">
+    <div class="alert alert-success text-white">
+        <span>Attivita Creata con Successo!</span>
+      </div>
+</div>
+
+<script> const piantagioneId = '<%= piantagioneId %>' ;</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+<script src="/scripts/piantagione.js"></script>
+
+<%- include('giardino-template2') %>
