@@ -386,7 +386,7 @@ fetch('http://localhost:8000/attivita/'+idpiantagione,{
         }
         ).mount();
     });
-})
+});
 
 
 

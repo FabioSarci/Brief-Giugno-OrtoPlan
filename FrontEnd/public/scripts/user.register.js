@@ -104,10 +104,16 @@ body: JSON.stringify({
 }),
 headers: {
   "Content-Type": "application/json",
+  authorization: 'Bearer ' + localStorage.getItem('token')
 },
 })
 .then((res) =>{
-  return res.json();
+  if (res.status == 401){
+    localStorage.clear();
+    window.location.href = '/OrtoPlan';
+    throw new Error();
+}
+return res.json();
 })
 .then((data) =>{
   if (data.isError){

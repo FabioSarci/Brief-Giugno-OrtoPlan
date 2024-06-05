@@ -8,12 +8,38 @@
     <li class="border-t-white border-t-2"><button onclick="window.location.href = '/OrtoPlan/giardino/'+ userId">Home</button></li>
     <li><button onclick="coltivazioni()">Le Tue Coltivazioni</button></li>
     <li><button onclick="previsioni()">Previsioni della Settimana</button></li>
-    <li class="mt-auto border-t-2 border-t-white"><a href="">Profilo</a></li>
+    <li class="mt-auto border-t-2 border-t-white"><button onclick="openProfileModal()">Profilo</button></li>
     <li><a href="">Notifiche</a></li>
     <li><button onclick="logout()">Esci</button></li>
     </ul>
 </div>
 </div>
+
+<!-- Profilp modal -->
+<dialog id="profileModal" class="modal">
+    <!-- modal box -->
+    <div class="flex flex-col modal-box gap-4">
+        <div class="flex flex-col gap-4">
+            <h3 class="font-bold text-lg text-accent">Profilo</h3>
+            <form id="profileForm" class="flex flex-col gap-4">
+                <input name="firstName" placeholder="Nome" type="text" class="input input-bordered w-full">
+                <input name="lastName" placeholder="Cognome" type="text" class="input input-bordered w-full">
+                <input name="email" placeholder="Email" type="text" class="input input-bordered w-full">
+                <input name="password" placeholder="Password" type="password" class="input input-bordered w-full">
+                <input name="conferma" placeholder="Conferma Password" type="password" class="input input-bordered w-full">
+                <input name="datanascita" placeholder="DataNascita" type="date" class="input input-bordered w-full">
+                <div class="modal-action">
+                    <button type="button" class="btn border-accent text-accent btn-outline" onclick="profileModal.close()">Chiudi</button>
+                    <button type="submit" class="btn border-accent text-accent btn-outline">Salva</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- backdrop -->
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>
 
 <footer class="footer items-center p-4 bg-accent text-neutral-content">
     <aside class="items-center grid-flow-col">

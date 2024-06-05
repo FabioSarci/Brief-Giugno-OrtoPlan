@@ -28,4 +28,32 @@ export default function activityRouting(app){
         });
         res.json(activityList);
     })
+
+    app.get('/attivita-utente/:utenteid',isLoggedIn, async (req,res) =>{
+        const utenteid = req.params.utenteid;
+        console.log(utenteid);
+
+        const activityList = await prisma.attivita.findMany({
+            where: {
+                piantagione: {
+                  idutente: +utenteid,
+                },
+            },
+            orderBy:{
+                data : "asc"
+            },
+            include: {
+                piantagione: {
+                    include: {
+                        utente: {
+                            select:{
+                                id: true
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        res.json(activityList);
+    })
 }
