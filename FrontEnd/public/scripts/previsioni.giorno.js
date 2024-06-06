@@ -131,6 +131,7 @@ function meteo(lat,lon){
             }
             // Crea un nuovo div
             let newDiv = document.createElement('div');
+
             // Aggiungi le classi al div
             newDiv.className = 'splide__slide border-2 border-accent rounded-xl justify-center lg:max-w-72 max-w-80 p-2';
             // Aggiungi contenuto al div (opzionale)

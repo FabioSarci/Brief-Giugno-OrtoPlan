@@ -2,13 +2,13 @@
     <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label> 
     <ul class="min-h-screen menu p-4 bg-accent text-white">
     <!-- Sidebar content here -->
-    <div class="items-center justify-center">
+    <div data-aos="fade-right" class="items-center justify-center">
         <a href="http://localhost:3000/OrtoPlan"><img height="100px" width="100px" src="/assets/logo.png" alt=""></a>
     </div>
-    <li class="border-t-white border-t-2"><button onclick="window.location.href = '/OrtoPlan/giardino/'+ userId">Home</button></li>
-    <li><button onclick="coltivazioni()">Le Tue Coltivazioni</button></li>
-    <li><button onclick="previsioni()">Previsioni della Settimana</button></li>
-    <li class="mt-auto border-t-2 border-t-white"><button onclick="openProfileModal()">Profilo</button></li>
+    <li data-aos="fade-right" class="border-t-white border-t-2"><button onclick="window.location.href = '/OrtoPlan/giardino/'+ userId">Home</button></li>
+    <li data-aos="fade-right"><button onclick="coltivazioni()">Le Tue Coltivazioni</button></li>
+    <li data-aos="fade-right"><button onclick="previsioni()">Previsioni della Settimana</button></li>
+    <li data-aos="fade-right" class="mt-auto border-t-2 border-t-white"><button onclick="openProfileModal()">Profilo</button></li>
     <li><a href="">Notifiche</a></li>
     <li><button onclick="logout()">Esci</button></li>
     </ul>
@@ -58,8 +58,10 @@
 <script>
 const userId = '<%= userId %>';
 </script>
-<script src="/scripts/giardino.js"></script>  
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init();</script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>   
+<script src="/scripts/giardino.js"></script>  
 
 </body>
 </html>

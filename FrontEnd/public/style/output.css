@@ -2757,14 +2757,6 @@ html:has(.drawer-toggle:checked) {
   min-height: 100vh;
 }
 
-.min-h-52 {
-  min-height: 13rem;
-}
-
-.min-h-72 {
-  min-height: 18rem;
-}
-
 .w-80 {
   width: 20rem;
 }
@@ -2775,18 +2767,6 @@ html:has(.drawer-toggle:checked) {
 
 .w-full {
   width: 100%;
-}
-
-.w-2\/3 {
-  width: 66.666667%;
-}
-
-.w-2\/4 {
-  width: 50%;
-}
-
-.w-2 {
-  width: 0.5rem;
 }
 
 .max-w-80 {
@@ -3148,10 +3128,6 @@ body {
 
   .lg\:min-h-52 {
     min-height: 13rem;
-  }
-
-  .lg\:w-full {
-    width: 100%;
   }
 
   .lg\:max-w-72 {
