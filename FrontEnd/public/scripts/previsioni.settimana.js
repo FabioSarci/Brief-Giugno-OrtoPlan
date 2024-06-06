@@ -1,8 +1,9 @@
-const elemento = document.querySelector('#previsionigiorno');
-let immagine = '';
 let lat = '41.8919';
 let lon = '12.5113';
-const cityForm = document.querySelector('#cityForm');
+const elemento = document.querySelector('#previsionisettimana');
+let immagine = '';
+
+meteo(lat,lon);
 
 cityForm.addEventListener('submit', (e) =>{
     e.preventDefault();
@@ -56,8 +57,6 @@ cityForm.addEventListener('submit', (e) =>{
 
 });
 
-meteo(lat,lon)
-
 function meteo(lat,lon){
 
     let previsionigiornaliere = [];
@@ -69,22 +68,23 @@ function meteo(lat,lon){
         element.remove();
     });
 
-    fetch('https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+'&current=temperature_2m,is_day,precipitation,rain,snowfall,cloud_cover&hourly=temperature_2m,rain,snowfall,weather_code,cloud_cover,cloud_cover_low,cloud_cover_mid,cloud_cover_high,wind_speed_80m,soil_temperature_6cm,uv_index&timezone=GMT',
+    fetch('https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+'&hourly=uv_index&daily=weather_code,temperature_2m_max,temperature_2m_min,uv_index_max,precipitation_sum,wind_speed_10m_max&timezone=GMT',
     {method: 'GET'}
 )
 .then((res) => {
     return res.json();
 })
 .then((data) => {
-    data.hourly.time.forEach(element => {
-        orario = {
-            ora: element,
-            codice: data.hourly.weather_code[indice],
-            gradi: data.hourly.temperature_2m[indice],
-            uv: data.hourly.uv_index[indice],
-            wind: data.hourly.wind_speed_80m[indice]
+    data.daily.time.forEach(element => {
+        giornata = {
+            giorno: element,
+            codice: data.daily.weather_code[indice],
+            temp_max: data.daily.temperature_2m_max[indice],
+            temp_min: data.daily.temperature_2m_min[indice],
+            uv: data.daily.uv_index_max[indice],
+            mm_precipitazioni: data.daily.precipitation_sum[indice],
         };
-        previsionigiornaliere.push(orario);
+        previsionigiornaliere.push(giornata);
         indice += 1;
     });
 
@@ -109,7 +109,7 @@ function meteo(lat,lon){
                 immagine = 'Pioggia-Leggera.svg';
             }else if(element.codice >= 61 && element.codice <=67){
                 element.codice = 'Pioggia';
-                immagine = 'Pioggia-Leggera.svg';
+                immagine = 'Pioggia-Forte.svg';
             }else if(element.codice >= 71 && element.codice <=75){
                 element.codice = 'Lieve Nevicata';
                 immagine = 'Neve.svg';
@@ -132,121 +132,36 @@ function meteo(lat,lon){
             // Crea un nuovo div
             let newDiv = document.createElement('div');
             // Aggiungi le classi al div
-            newDiv.className = 'splide__slide border-2 border-accent rounded-xl justify-center lg:max-w-72 max-w-80 p-2';
+            newDiv.className = 'splide__slide border-2 border-accent rounded-xl justify-center p-4';
             // Aggiungi contenuto al div (opzionale)
             newDiv.innerHTML = `
-                    <div class='flex lg:flex-col w-full gap-1 lg:gap-0'>
-                        <div class='flex justify-between items-center lg:border-b lg:border-b-accent lg:pb-2 gap-1'>
-                            <p class='lg:text-xl'>${moment(element.ora).format('LT')}</p>
+                    <div class='flex-col w-full gap-1 lg:gap-0'>
+                        <div class='flex justify-between items-center border-b border-b-accent pb-2 gap-1'>
+                            <p class='lg:text-xl'>${moment(element.giorno).format('dddd,DD-MM-YYY')}</p>
                             <img src="/assets/meteo/${immagine}" alt="">
                         </div>
                         <div class='flex items-center'>
                             <p class='mt-1 lg:text-start text-sm'>${element.codice}</p>
                         </div>
+                        <div class='flex justify-between'>
+                            <div class=flex>
+                                <p class='mt-1 lg:text-start text-sm'>min</p>
+                                <p class=' text-2xl'>${element.temp_min}°C</p>
+                            </div>
+                            <div class=flex>
+                                <p class='mt-1 lg:text-start text-sm'>max</p>
+                                <p class=' text-2xl'>${element.temp_max}°C</p>
+                            </div>
+                        </div>
                         <div class='flex justify-between items-center'>
-                            <p class=' text-2xl'>${element.gradi}°C</p>
-                            <p>Vento: ${element.wind} km/h</p>
+                            <p>UV Index: ${element.uv}</p>
+                            <p>Pioggia: ${element.mm_precipitazioni} mm</p>
                         </div>
                     </div>
             `;
             const orattuale = JSON.parse(moment().format('H'));
             elemento.appendChild(newDiv);
-            new Splide( '#splide',
-        {
-            type: 'slide',
-            rewind: true,
-            rewindByDrag: true,
-            gap: '1rem',
-            start: orattuale,
-            perMove: 1,
-            focus:'center',
-            pagination: false
-        }
-     ).mount();
         }
     });
 });
 };
-
-//Prossime attivita
-
-const user = JSON.parse(localStorage.getItem('user'));
-
-fetch('http://localhost:8000/attivita-utente/'+user.id,{
-    method:'GET',
-    headers:{
-            "Content-Type": "application/json",
-            authorization: 'Bearer ' + localStorage.getItem('token')
-    },
-})
-.then((res) =>{
-    if (res.status == 401){
-        localStorage.clear();
-        window.location.href = '/OrtoPlan';
-        throw new Error();
-    }
-    return res.json();
-})
-.then((data) =>{
-    console.log(data);
-    const padre = document.querySelector('#attivita');
-    data.forEach(attivita =>{
-        let newdiv = document.createElement('div');
-        newdiv.className = 'splide__slide border-2 border-accent rounded-xl justify-center lg:max-w-72 max-w-80 p-2 w-full';
-        newdiv.innerHTML = 
-        `
-        <div class='flex lg:flex-col w-full gap-1 lg:gap-0'>
-        <div class='flex justify-between items-center lg:border-b lg:border-b-accent lg:pb-2 gap-1'>
-            <p class='lg:text-xl'>${attivita.nome}</p>
-        </div>
-        <div class='flex items-center justify-between'>
-            <p class='lg:text-start text-sm'>${attivita.tipologia}</p>
-            <div class='flex flex-col'>
-                <p class='text-sm'>${moment(attivita.data).format('DD-MM-YYY')}</p>
-                <p class='lg:text-start text-sm'>${attivita.piantagione.nome}</p>
-            </div>
-        </div>
-        <div class='flex justify-between items-center'>
-            <p class=' text-2xl'>${attivita.ripetizione}</p>
-        </div>
-        </div>
-        `;
-        padre.appendChild(newdiv);
-
-        new Splide( '#splide2',
-        {
-            type: 'slide',
-            rewind: true,
-            rewindByDrag: true,
-            gap: '1rem',
-            start: 0,
-            perMove: 1,
-            pagination: false
-        }
-        ).mount();
-    });
-});
-
-
-
-
-
-    new Splide( '#splide3' ).mount();
-
-
-function checkValidation(validation) {
-    Object.keys(validation).forEach((key) => {
-        const el = document.querySelector(`input[name=${key}]`);
-        setErr(el, validation[key]);
-    });
-    };
-    
-    function setErr(el,messages){
-    el.classList.add('input-error');
-    messages.reverse().forEach(message =>{
-        const p = document.createElement('p');
-        p.textContent = message;
-        p.classList.add('text-red-500','error-message');
-        el.parentNode.insertBefore(p,el.nextSibling);
-    });
-    };

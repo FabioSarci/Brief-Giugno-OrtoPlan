@@ -5,6 +5,9 @@ const titolo = document.querySelector('#titolo');
 const user = JSON.parse(localStorage.getItem('user'));
 let piantagione = {};
 
+const indietro = document.querySelector('#indietro');
+indietro.href = 'http://localhost:3000/OrtoPlan/giardino/coltivazioni/'+user.id;
+
 //Dati e Caratteristiche piantagione
 
 fetch('http://localhost:8000/piantagione/'+ +piantagioneId,{
@@ -351,7 +354,6 @@ fetch('http://localhost:8000/attivita/'+idpiantagione,{
     return res.json();
 })
 .then((data) =>{
-    console.log(data);
     const padre = document.querySelector('#attivita');
     data.forEach(attivita =>{
 

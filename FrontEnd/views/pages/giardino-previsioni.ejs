@@ -1,1 +1,28 @@
 <%- include('giardino-template') %>
+
+<div class="flex flex-col items-center text-center w-full h-full p-4">
+    <div class="text-accent lg:text-2xl text- font-semibold flex flex-col lg:flex-row justify-between items-center w-full gap-2 lg:gap-0">
+        <h1 class="text-4xl font-semibold text-accent">Previsioni della Settimana</h1>
+        <div class="gap-2">
+            <form id="cityForm" class="flex gap-2">
+                    <img  src="/assets/meteo/map.svg" alt="">
+                    <input name="nomecitta" placeholder="roma"  type="text" class="input input-bordered input-sm">
+                    <button type="submit" class="btn btn-sm border-accent text-accent btn-outline">cerca</button>
+            </form>
+        </div>
+    </div>
+    <div class="divider divider-accent"></div>
+
+    <div id="previsionisettimana" class="flex flex-col gap-2 w-full lg:min-h-52">
+
+    </div>
+</div>
+
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+<script src="/scripts/previsioni.settimana.js"></script>
+
+<%- include('giardino-template2') %>

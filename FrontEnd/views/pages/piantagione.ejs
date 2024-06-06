@@ -2,8 +2,11 @@
 
 <div class="flex flex-col items-center text-center w-full h-full shadow-2xl">
     <div class="flex justify-between items-center w-full p-4">
-        <h1 id="titolo" class="text-4xl text-accent font-bold">
-        </h1>
+        <div class="flex gap-1 items-center">
+            <a id="indietro" href=""><img src="/assets/indietro.svg" alt=""></a>
+            <h1 id="titolo" class="text-4xl text-accent font-bold">
+            </h1>
+        </div>
         <div class="flex justify-center items-center gap-1">
             <button class="btn border-accent text-accent" onclick="openEditModal()">Modifica</button>
             <button class="btn border-accent text-accent" onclick="openDeleteModal()">Elimina</button>
@@ -106,7 +109,10 @@
       </div>
 </div>
 
-<script> const piantagioneId = '<%= piantagioneId %>' ;</script>
+<script> 
+    const piantagioneId = '<%= piantagioneId %>' ;
+    const utente = JSON.parse(localStorage.getItem('user'));
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 <script src="/scripts/piantagione.js"></script>

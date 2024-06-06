@@ -31,7 +31,6 @@ export default function activityRouting(app){
 
     app.get('/attivita-utente/:utenteid',isLoggedIn, async (req,res) =>{
         const utenteid = req.params.utenteid;
-        console.log(utenteid);
 
         const activityList = await prisma.attivita.findMany({
             where: {
