@@ -22,9 +22,21 @@ fetch('http://localhost:8000/piantagioni/'+ user.id,{
     return res.json();
 })
 .then((data) =>{
-    data.forEach(element =>{
-        creaElemento(element);
-    })
+    if (data.length == 0){
+        tabella.classList.replace('lg:grid-cols-3','lg:grid-cols-1');
+        tabella.classList.replace('grid-cols-3','grid-cols-1');
+        let newdiv = document.createElement('div');
+        newdiv.id = 'noElement';
+        newdiv.className = 'w-full text-xl text-center text-gray-500';
+        newdiv.innerHTML = ` Non ci sono Coltivazioni a tuo nome. `;
+        tabella.appendChild(newdiv);
+    }else{
+        tabella.classList.replace('lg:grid-cols-1','lg:grid-cols-3');
+        tabella.classList.replace('grid-cols-1','grid-cols-3');
+        data.forEach(element =>{
+            creaElemento(element);
+        });
+    };
 })
 
 function creaElemento(element){
@@ -184,9 +196,13 @@ createForm.addEventListener('submit', (e) =>{
         }
         createModal.close();
         console.log(data);
-        data.forEach(piantagione =>{
-            creaElemento(piantagione);
-        })
+            data.forEach(piantagione =>{
+                document.querySelector('#noElement').remove();
+                tabella.classList.replace('lg:grid-cols-1','lg:grid-cols-3');
+                tabella.classList.replace('grid-cols-1','grid-cols-3');
+                creaElemento(piantagione);
+                
+            });
     });
 
 });
