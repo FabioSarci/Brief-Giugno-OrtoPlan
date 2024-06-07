@@ -249,12 +249,6 @@ fetch('http://localhost:8000/attivita-utente/'+user.id,{
 });
 
 
-
-
-
-    new Splide( '#splide3' ).mount();
-
-
 function checkValidation(validation) {
     Object.keys(validation).forEach((key) => {
         const el = document.querySelector(`input[name=${key}]`);
