@@ -147,8 +147,10 @@ profileForm.addEventListener('submit', (e) =>{
         }
         profileModal.close();
         localStorage.clear();
-        window.location.href = '/OrtoPlan';
-        alertSuccess(); 
+        alertSuccess();
+        setTimeout(()=>{
+            window.location.href = '/OrtoPlan';
+        }, '2000');
     });
 
 
@@ -166,7 +168,7 @@ function checkValidation(validation) {
     messages.reverse().forEach(message =>{
         const p = document.createElement('p');
         p.textContent = message;
-        p.classList.add('text-red-500','error-message');
+        p.classList.add('text-red-500','error-message','text-sm');
         el.parentNode.insertBefore(p,el.nextSibling);
     })
   }

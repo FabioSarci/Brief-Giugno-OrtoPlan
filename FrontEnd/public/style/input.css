@@ -14,29 +14,11 @@
   width: 100%;
   height: 100%;
   background-image: url(../assets/sfondo.jpg);
-  filter: blur(2px);
-  opacity: 0.5;
+  filter: blur(4px);
+  opacity: 0.4;
   background-size: cover;
   background-repeat: no-repeat;
   z-index: -99999;
-}
-
-.cornice{
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.cornice::before {
-content: '';
-position: absolute;
-width: 100%;
-height: 100%;
-background-image: url(../assets/cornice2.png);
-background-size: cover;
-background-repeat: no-repeat;
-z-index: 1;
-
 }
 
 /* @font-face{

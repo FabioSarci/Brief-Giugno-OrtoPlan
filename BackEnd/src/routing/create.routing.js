@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { createUserValidation } from '../validations/users.validations.js';
+import { createUserValidation, updateUserValidation } from '../validations/users.validations.js';
 import prisma from '../../db/prisma.js';
 import moment from 'moment';
 import isLoggedIn from '../middleware/isLoggedIn.js';
@@ -31,7 +31,7 @@ export default function userRouting(app){
     });
 
     //Edit User
-    app.put('/user/:id',isLoggedIn,async (req,res) =>{
+    app.put('/user/:id',isLoggedIn,updateUserValidation,async (req,res) =>{
 
         const userId = +req.params.id;
 

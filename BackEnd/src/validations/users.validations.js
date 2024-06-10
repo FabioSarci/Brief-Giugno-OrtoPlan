@@ -91,9 +91,6 @@ export function updateUserValidation(req, res, next){
         message: "^You need to be at least 18 years old"
       }
     },
-    email: {
-      userExists: {},
-    },
   }).then(
   () => {
     // on success

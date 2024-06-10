@@ -2,7 +2,6 @@
 
 const user = JSON.parse(localStorage.getItem('user'));
 
-
 //Lista delle Coltivazioni
 const tabella = document.querySelector('#tabella');
 
@@ -220,7 +219,7 @@ el.classList.add('input-error');
 messages.reverse().forEach(message =>{
     const p = document.createElement('p');
     p.textContent = message;
-    p.classList.add('text-red-500','error-message');
+    p.classList.add('text-red-500','error-message','text-sm');
     el.parentNode.insertBefore(p,el.nextSibling);
 })
 }

@@ -2697,10 +2697,6 @@ html:has(.drawer-toggle:checked) {
   top: 0px;
 }
 
-.z-0 {
-  z-index: 0;
-}
-
 .z-10 {
   z-index: 10;
 }
@@ -2711,6 +2707,10 @@ html:has(.drawer-toggle:checked) {
 
 .z-50 {
   z-index: 50;
+}
+
+.z-0 {
+  z-index: 0;
 }
 
 .mt-1 {
@@ -2757,6 +2757,14 @@ html:has(.drawer-toggle:checked) {
   min-height: 100vh;
 }
 
+.w-2\/3 {
+  width: 66.666667%;
+}
+
+.w-3\/4 {
+  width: 75%;
+}
+
 .w-80 {
   width: 20rem;
 }
@@ -2769,6 +2777,10 @@ html:has(.drawer-toggle:checked) {
   width: 100%;
 }
 
+.w-\[80\%\] {
+  width: 80%;
+}
+
 .max-w-80 {
   max-width: 20rem;
 }
@@ -2777,16 +2789,16 @@ html:has(.drawer-toggle:checked) {
   grid-auto-flow: column;
 }
 
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.grid-cols-1 {
-  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .flex-col {
@@ -2901,13 +2913,18 @@ html:has(.drawer-toggle:checked) {
   background-color: var(--fallback-a,oklch(var(--a)/var(--tw-bg-opacity)));
 }
 
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
 .bg-accent\/80 {
   background-color: var(--fallback-a,oklch(var(--a)/0.8));
 }
 
-.bg-white {
+.bg-green-700 {
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(21 128 61 / var(--tw-bg-opacity));
 }
 
 .fill-current {
@@ -2932,10 +2949,6 @@ html:has(.drawer-toggle:checked) {
 
 .text-center {
   text-align: center;
-}
-
-.text-start {
-  text-align: start;
 }
 
 .text-2xl {
@@ -2963,6 +2976,11 @@ html:has(.drawer-toggle:checked) {
   line-height: 1.75rem;
 }
 
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -2985,6 +3003,11 @@ html:has(.drawer-toggle:checked) {
   color: var(--fallback-a,oklch(var(--a)/var(--tw-text-opacity)));
 }
 
+.text-gray-500 {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
 .text-neutral-content {
   --tw-text-opacity: 1;
   color: var(--fallback-nc,oklch(var(--nc)/var(--tw-text-opacity)));
@@ -2998,11 +3021,6 @@ html:has(.drawer-toggle:checked) {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-gray-500 {
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .shadow-2xl {
@@ -3032,28 +3050,11 @@ html:has(.drawer-toggle:checked) {
   width: 100%;
   height: 100%;
   background-image: url(../assets/sfondo.jpg);
-  filter: blur(2px);
-  opacity: 0.5;
+  filter: blur(4px);
+  opacity: 0.4;
   background-size: cover;
   background-repeat: no-repeat;
   z-index: -99999;
-}
-
-.cornice{
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.cornice::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: url(../assets/cornice2.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: 1;
 }
 
 /* @font-face{
@@ -3066,6 +3067,27 @@ body {
 } */
 
 @media (min-width: 1024px) {
+  .lg\:btn-md {
+    height: 3rem;
+    min-height: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .btn-square:where(.lg\:btn-md) {
+    height: 3rem;
+    width: 3rem;
+    padding: 0px;
+  }
+
+  .btn-circle:where(.lg\:btn-md) {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 9999px;
+    padding: 0px;
+  }
+
   .lg\:drawer-open > .drawer-toggle {
     display: none;
   }
@@ -3132,13 +3154,14 @@ body {
     font-size: 2.25rem;
     line-height: 2.5rem;
   }
+
+  .md\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
 }
 
 @media (min-width: 1024px) {
-  .lg\:grid {
-    display: grid;
-  }
-
   .lg\:hidden {
     display: none;
   }
@@ -3155,12 +3178,12 @@ body {
     max-width: 18rem;
   }
 
-  .lg\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .lg\:grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .lg\:flex-row {

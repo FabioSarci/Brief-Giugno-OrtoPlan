@@ -8,7 +8,7 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 app.get('/OrtoPlan', (req, res) =>{
-    res.render('pages/landing');
+    res.render('pages/landing',res);
 });
 
 app.get('/Ortoplan/giardino/:id', (req,res) =>{

@@ -68,6 +68,7 @@ loginForm.addEventListener('submit', async(e) =>{
 function setErr(el,message){
         const p = document.createElement('p');
         p.textContent = message;
-        p.classList.add('text-red-500','error-message');
+        p.classList.add('text-red-500','error-message','text-sm','text-sm');
         el.parentNode.insertBefore(p,el.nextSibling)
 }
+

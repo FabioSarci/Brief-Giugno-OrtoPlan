@@ -42,6 +42,12 @@ cityForm.addEventListener('submit', (e) =>{
         },
     })
     .then((res) =>{
+        if(res.status == 422){
+            const el = document.querySelector('#err');
+            const message = {errore : "Citta non Presente!"};
+            setCityErr(el, JSON.stringify(message.errore));
+            return;
+        }
         return res.json();
     })
     .then((data) =>{
@@ -52,11 +58,12 @@ cityForm.addEventListener('submit', (e) =>{
         lat = JSON.stringify(data.lat);
         lon = JSON.stringify(data.lon);
         meteo(lat,lon);
+        attivita();
     });
 
 });
 
-meteo(lat,lon)
+meteo(lat,lon);
 
 function meteo(lat,lon){
 
@@ -171,73 +178,32 @@ function meteo(lat,lon){
 
 //Prossime attivita
 
-const user = JSON.parse(localStorage.getItem('user'));
-
-fetch('http://localhost:8000/attivita-utente/'+user.id,{
-    method:'GET',
-    headers:{
-            "Content-Type": "application/json",
-            authorization: 'Bearer ' + localStorage.getItem('token')
-    },
-})
-.then((res) =>{
-    if (res.status == 401){
-        localStorage.clear();
-        window.location.href = '/OrtoPlan';
-        throw new Error();
-    }
-    return res.json();
-})
-.then((data) =>{
-    console.log(data);
-    const padre = document.querySelector('#attivita');
-    if (data.length == 0){
-        let newdiv = document.createElement('div');
-        newdiv.className = 'w-full text-xl text-center text-gray-500'
-        newdiv.innerHTML = ` Non ci sono Attivita in programma. `
-        padre.appendChild(newdiv);
-        new Splide( '#splide2',
-            {
-                type: 'slide',
-                rewind: true,
-                rewindByDrag: true,
-                gap: '1rem',
-                start: 0,
-                perMove: 1,
-                pagination: false
-            }
-            ).mount();
-
-        
-    }else{
-        data.forEach(attivita =>{
-            var today = new Date();
-            today.setHours(0, 0, 0, 0); // Imposta l'orario di oggi a mezzanotte
-            var inputDate = new Date(attivita.data);
-            if (inputDate >= today) {
-                let newdiv = document.createElement('div');
-                newdiv.className = 'splide__slide border-2 border-accent rounded-xl justify-center lg:max-w-72 max-w-80 p-2 w-full';
-                newdiv.innerHTML = 
-                `
-                <div class='flex lg:flex-col w-full gap-1 lg:gap-0'>
-                <div class='flex justify-between items-center lg:border-b lg:border-b-accent lg:pb-2 gap-1'>
-                    <p class='lg:text-xl'>${attivita.nome}</p>
-                </div>
-                <div class='flex items-center justify-between'>
-                    <p class='lg:text-start text-sm'>${attivita.tipologia}</p>
-                    <div class='flex flex-col'>
-                        <p class='text-sm'>${moment(attivita.data).format('DD-MM-YYY')}</p>
-                        <p class='lg:text-start text-sm'>${attivita.piantagione.nome}</p>
-                    </div>
-                </div>
-                <div class='flex justify-between items-center'>
-                    <p class=' text-2xl'>${attivita.ripetizione}</p>
-                </div>
-                </div>
-                `;
-                padre.appendChild(newdiv);
-        
-                new Splide( '#splide2',
+function attivita(){
+    const user = JSON.parse(localStorage.getItem('user'));
+    fetch('http://localhost:8000/attivita-utente/'+user.id,{
+        method:'GET',
+        headers:{
+                "Content-Type": "application/json",
+                authorization: 'Bearer ' + localStorage.getItem('token')
+        },
+    })
+    .then((res) =>{
+        if (res.status == 401){
+            localStorage.clear();
+            window.location.href = '/OrtoPlan';
+            throw new Error();
+        }
+        return res.json();
+    })
+    .then((data) =>{
+        console.log(data);
+        const padre = document.querySelector('#attivita');
+        if (data.length == 0){
+            let newdiv = document.createElement('div');
+            newdiv.className = 'w-full text-xl text-center text-gray-500'
+            newdiv.innerHTML = ` Non ci sono Attivita in programma. `
+            padre.appendChild(newdiv);
+            new Splide( '#splide2',
                 {
                     type: 'slide',
                     rewind: true,
@@ -248,10 +214,53 @@ fetch('http://localhost:8000/attivita-utente/'+user.id,{
                     pagination: false
                 }
                 ).mount();
-            };
-        });
-    }
-});
+    
+            
+        }else{
+            data.forEach(attivita =>{
+                var today = new Date();
+                today.setHours(0, 0, 0, 0); // Imposta l'orario di oggi a mezzanotte
+                var inputDate = new Date(attivita.data);
+                if (inputDate >= today) {
+                    let newdiv = document.createElement('div');
+                    newdiv.className = 'splide__slide border-2 border-accent rounded-xl justify-center lg:max-w-72 max-w-80 p-2 w-full';
+                    newdiv.innerHTML = 
+                    `
+                    <div class='flex lg:flex-col w-full gap-1 lg:gap-0'>
+                    <div class='flex justify-between items-center lg:border-b lg:border-b-accent lg:pb-2 gap-1'>
+                        <p class='lg:text-xl'>${attivita.nome}</p>
+                    </div>
+                    <div class='flex items-center justify-between'>
+                        <p class='lg:text-start text-sm'>${attivita.tipologia}</p>
+                        <div class='flex flex-col'>
+                            <p class='text-sm'>${moment(attivita.data).format('DD-MM-YYY')}</p>
+                            <p class='lg:text-start text-sm'>${attivita.piantagione.nome}</p>
+                        </div>
+                    </div>
+                    <div class='flex justify-between items-center'>
+                        <p class=' text-2xl'>${attivita.ripetizione}</p>
+                    </div>
+                    </div>
+                    `;
+                    padre.appendChild(newdiv);
+            
+                    new Splide( '#splide2',
+                    {
+                        type: 'slide',
+                        rewind: true,
+                        rewindByDrag: true,
+                        gap: '1rem',
+                        start: 0,
+                        perMove: 1,
+                        pagination: false
+                    }
+                    ).mount();
+                };
+            });
+        }
+    });
+}
+attivita();
 
 
 function checkValidation(validation) {
@@ -266,7 +275,15 @@ function checkValidation(validation) {
     messages.reverse().forEach(message =>{
         const p = document.createElement('p');
         p.textContent = message;
-        p.classList.add('text-red-500','error-message');
+        p.classList.add('text-red-500','error-message','text-sm');
         el.parentNode.insertBefore(p,el.nextSibling);
     });
     };
+
+    function setCityErr(el,message){
+        el.classList.remove('hidden');
+        const p = document.createElement('p');
+        p.textContent = message;
+        p.classList.add('text-red-500','error-message','text-sm','text-sm');
+        el.appendChild(p,el.nextSibling)
+}
