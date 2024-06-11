@@ -60,14 +60,14 @@ FrontEnd:
 ## Utilizzo
 
 Come avviare il progetto:
-<!-- 
+
     Avviare il BackEnd:
         cd BackEnd
         npm run dev
-        Gira sulla porta 8000 -->
+        <!-- Gira sulla porta 8000 -->
 
     Avviare il FrontEnd:
-        cd BackEnd
+        cd FrontEnd
         npm run dev
         npm run tw
         <!-- Gira sulla porta 3000 -->
