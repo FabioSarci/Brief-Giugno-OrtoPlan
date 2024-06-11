@@ -44,7 +44,7 @@ function creaElemento(element){
         plantDiv.className = '';
         plantDiv.innerHTML = `
         <a href='/OrtoPlan/giardino/coltivazioni/piantagione/${user.id}/${element.id}'>
-            <div class='flex flex-col justify-between items-center border border-accent rounded-xl p-4 h-full'>
+            <div class='flex flex-col justify-between items-center border border-accent rounded-xl p-4 h-full bg-white shadow-2xl'>
                 <h1 class='border-b border-b-accent pb-2 w-full text-center font-bold text-accent text-xl'>
                     ${element.nome}
                 </h1>

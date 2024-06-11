@@ -49,7 +49,7 @@ model Piantagione{
   datacreazione DateTime
   comuni Comune @relation(fields: [cap], references: [cap])
   cap String
-  utente User @relation(fields: [idutente], references: [id])
+  utente User @relation(fields: [idutente], references: [id],onDelete: Cascade)
   idutente Int
   pianta Pianta @relation(fields: [idpianta], references: [id])
   idpianta Int
@@ -63,7 +63,7 @@ model Attivita{
   tipologia TipoAttivita
   ripetizione String
   data DateTime
-  piantagione Piantagione @relation(fields: [idpiantagione],references: [id])
+  piantagione Piantagione @relation(fields: [idpiantagione],references: [id], onDelete: Cascade)
   idpiantagione Int
 }
 

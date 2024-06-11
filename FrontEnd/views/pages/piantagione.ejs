@@ -1,6 +1,6 @@
 <%- include('giardino-template') %>
 
-<div class="flex flex-col items-center text-center w-full h-full shadow-2xl">
+<div class="flex flex-col items-center text-center w-full h-full  shadow-2xl">
     <div class="flex justify-between items-center w-full p-4">
         <div class="flex gap-1 items-center">
             <a id="indietro" href=""><img src="/assets/indietro.svg" alt=""></a>
@@ -12,7 +12,7 @@
             <button class="btn border-accent text-accent" onclick="openDeleteModal()">Elimina</button>
         </div>
     </div>
-    <div id="caratteristiche" class="grid grid-cols-2 p-8 w-full text-xl">
+    <div id="caratteristiche" class="grid grid-cols-2 p-8 w-10/12 text-xl">
 
     </div>
 
@@ -86,7 +86,7 @@
         <div class="flex flex-col gap-4">
             <h3 class="font-bold text-lg text-accent">Nuova Attivita</h3>
             <form id="createActivityForm" class="flex flex-col gap-4">
-                <input name="nome" placeholder="Nome" type="text" class="input input-bordered w-full">
+                <input name="nomeAttivita" placeholder="Nome" type="text" class="input input-bordered w-full">
                 <select id="typeList" name="tipologia" placeholder="Tipologia" type="text" class="select select-bordered w-full"> 
                 </select>
                 <select id="repeatList" name="ripetizione" placeholder="Ripetizione" type="text" class="select select-bordered w-full">

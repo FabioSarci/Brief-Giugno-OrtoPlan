@@ -17,6 +17,57 @@ export default function activityRouting(app){
         });
         res.status(201);
         res.json(newActivity);
+    });
+
+    app.put('/attivita/:attivitaId', isLoggedIn, async (req,res) =>{
+        const attivitaId = +req.params.attivitaId;
+        const newdate = moment(req.body.data).toISOString();
+        const findActivity = await prisma.attivita.findUnique({
+            where:{
+                id : attivitaId
+            },
+        });
+        if(findActivity){
+            const updateActivity = await prisma.attivita.update({
+                where: {
+                    id:attivitaId
+                },
+                data:{
+                    data : newdate,
+                }
+            });
+            res.json(updateActivity);
+        }else{
+            res.status(404).json({message : 'Attivita not found'});
+        };
+        
+    })
+
+    app.put('/attivita/modifica/:attivitaId', isLoggedIn, async (req,res) =>{
+        const attivitaId = +req.params.attivitaId;
+        const findActivity = await prisma.attivita.findUnique({
+            where:{
+                id : attivitaId
+            },
+        });
+        if(findActivity){
+            const updateActivity = await prisma.attivita.update({
+                where: {
+                    id:attivitaId
+                },
+                data:{
+                    nome: req.body.nome,
+                    tipologia: req.body.tipologia,
+                    ripetizione: req.body.ripetizione,
+                    data: moment(req.body.data).format(),
+                    idpiantagione: parseInt(req.body.idpiantagione),
+                }
+            });
+            res.json(updateActivity);
+        }else{
+            res.status(404).json({message : 'Attivita not found'});
+        };
+        
     })
 
     app.get('/attivita/:piantagioneId',isLoggedIn, async (req,res) =>{

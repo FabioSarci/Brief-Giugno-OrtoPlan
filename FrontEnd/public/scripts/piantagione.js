@@ -30,43 +30,43 @@ fetch('http://localhost:8000/piantagione/'+ +piantagioneId,{
     titolo.innerHTML = `${data.nome}`;
     content.innerHTML = 
     `
-        <div class='flex flex-col border-2 border-accent p-4 rounded-ss-xl'>
+        <div class='flex flex-col border-2 border-accent p-4 rounded-ss-xl bg-white'>
             <h1 class='text-sm'>Descrizione:</h1>
             ${data.descrizione}
         </div>
-        <div class='flex flex-col border-2 border-accent p-4 rounded-se-xl'>
+        <div class='flex flex-col border-2 border-accent p-4 rounded-se-xl bg-white'>
         <h1 class='text-sm'>Proprietario </h1>
             ${user.firstName} ${user.lastName}
         </div>
-        <div class='flex flex-col border-2 border-accent p-4'>
+        <div class='flex flex-col border-2 border-accent p-4 bg-white'>
         <h1 class='text-sm'>Situato a</h1>
             ${data.comuni.denominazione} - ${data.comuni.cap}
         </div>
-        <div class='flex flex-col border-2 border-accent p-4'>
+        <div class='flex flex-col border-2 border-accent p-4 bg-white'>
         <h1 class='text-sm'>Aperta il</h1>
             ${moment(data.datacreazione).format('DD-MM-YYYY')}
         </div>
-        <div class='flex flex-col border-2 border-accent p-4'>
+        <div class='flex flex-col border-2 border-accent p-4 bg-white'>
             <h1 class='text-sm'>Pianta</h1>
             ${data.pianta.nome}
         </div>
-        <div class='flex flex-col border-2 border-accent p-4'>
+        <div class='flex flex-col border-2 border-accent p-4 bg-white'>
             <h1 class='text-sm'>Tipologia</h1>
             ${data.pianta.tipologia}
         </div>
-        <div class='flex flex-col border-2 border-accent p-4'>
+        <div class='flex flex-col border-2 border-accent p-4 bg-white'>
             <h1 class='text-sm'>Stagione di Semina</h1>
             <p>${data.pianta.stagione_semina}</p>
         </div>
-        <div class='flex flex-col border-2 border-accent p-4'>
+        <div class='flex flex-col border-2 border-accent p-4 bg-white'>
             <h1 class='text-sm'>Stagione di Raccolto</h1>
             <p>${data.pianta.stagione_raccolto}</p>
         </div>
-        <div class='flex flex-col border-2 border-accent p-4 rounded-bl-xl'>
+        <div class='flex flex-col border-2 border-accent p-4 rounded-bl-xl bg-white'>
             <h1 class='text-sm'>Temperatura di Crescita</h1>
             ${data.pianta.temperatura_ottimale}
         </div>
-        <div class='border-2 border-accent p-4 rounded-br-xl'>
+        <div class='border-2 border-accent p-4 rounded-br-xl bg-white'>
             <button type="button" class="btn border-accent text-accent" onclick="openCreateActivityModal()">Aggiungi Attivita<button>
         </div>
         
@@ -208,7 +208,7 @@ typeList.forEach(tipologia =>{
 });
 
 //lista ripetizioni
-const repeatList = ['1 Volta al Giorno','2 Volte al Giorno','1 Volta a Settimana','2 Volte a Settimana','3 Volte a Settimana','4 Volte a Settimana','1 Volta al Mese','2 Volte al Mese','3 Volte al Mese','1 Volta all anno'];
+const repeatList = ['1 Volta al Giorno','1 Volta a Settimana','2 Volte a Settimana','3 Volte a Settimana','4 Volte a Settimana','1 Volta al Mese','2 Volte al Mese','3 Volte al Mese','1 Volta all anno'];
 const repeatSelect = document.querySelector('#repeatList');
 repeatList.forEach(string =>{
     const repeatOption = document.createElement('option');
@@ -221,8 +221,11 @@ repeatList.forEach(string =>{
 //Creazione attivita
 const createActivityForm = document.querySelector('#createActivityForm');
 const createActivityModal = document.querySelector('#createActivityModal');
+let actMod;
+let activity = []
 
 function openCreateActivityModal() {
+    actMod = undefined
     createActivityModal.showModal();
     createActivityForm.reset();
 };
@@ -240,7 +243,7 @@ createActivityForm.addEventListener('submit', (e) =>{
     const nome = e.target[0].value;
     const tipologia = e.target[1].value;
     const ripetizione = e.target[2].value;
-    const data = e.target[3].value;
+    const data = moment(e.target[3].value).format();
     const idpiantagione = +piantagioneId;
 
     validate.extend(validate.validators.datetime, {
@@ -302,8 +305,9 @@ createActivityForm.addEventListener('submit', (e) =>{
         return
     };
 
-    fetch('http://localhost:8000/attivita',{
-        method:'POST',
+    const url = actMod ? 'http://localhost:8000/attivita/modifica/' +actMod.id : 'http://localhost:8000/attivita';
+    fetch(url,{
+        method: actMod ? 'PUT': 'POST',
         body: JSON.stringify({
             nome,
             tipologia,
@@ -374,24 +378,35 @@ fetch('http://localhost:8000/attivita/'+idpiantagione,{
             ).mount();
     }else{
         data.forEach(attivita =>{
+            activity.push(attivita);
 
             let newdiv = document.createElement('div');
-            newdiv.className = 'splide__slide border-2 border-accent rounded-xl justify-center lg:max-w-72 max-w-80 p-2 w-full';
+            newdiv.className = 'splide__slide border-2 border-accent rounded-xl justify-center lg:max-w-72 max-w-80 p-2 w-full bg-white shadow-2xl';
             newdiv.innerHTML = 
             `
-            <div class='flex lg:flex-col w-full gap-1 lg:gap-0'>
-            <div class='flex justify-between items-center lg:border-b lg:border-b-accent lg:pb-2 gap-1'>
-                <p class='lg:text-xl'>${attivita.nome}</p>
-            </div>
-            <div class='flex items-center justify-between'>
-                <p class='mt-1 lg:text-start text-sm'>${attivita.tipologia}</p>
-                <p class='text-sm'>${moment(attivita.data).format('DD-MM-YYY')}</p>
-            </div>
-            <div class='flex justify-between items-center'>
-                <p class=' text-2xl'>${attivita.ripetizione}</p>
-            </div>
-            </div>
+                <div class='flex lg:flex-col w-full gap-1 lg:gap-0'>
+                <div class='flex justify-between items-center lg:border-b lg:border-b-accent lg:pb-2 gap-1'>
+                    <p class='lg:text-xl'>${attivita.nome}</p>
+                </div>
+                <div class='flex items-center justify-between'>
+                    <p class='mt-1 lg:text-start text-sm'>${attivita.tipologia}</p>
+                    <p class='text-sm'>${moment(attivita.data).format('DD-MM-YYYY')}</p>
+                </div>
+                <div class='flex justify-between items-center'>
+                    <p class=' text-2xl'>${attivita.ripetizione}</p>
+                </div>
+                </div>
             `;
+            newdiv.onclick = () =>{
+                actMod = activity.find((a) => a.id === attivita.id);
+                console.log(actMod);
+                createActivityModal.showModal();
+                document.querySelector('input[name=nomeAttivita]').value = actMod.nome;
+                document.querySelector('#typeList').value = actMod.tipologia;
+                document.querySelector('#repeatList').value = actMod.ripetizione;
+                document.querySelector('input[name=data]').value = moment(actMod.data).format('YYYY-MM-DD');
+            };
+
             padre.appendChild(newdiv);
     
             new Splide( '#splide',
@@ -408,7 +423,6 @@ fetch('http://localhost:8000/attivita/'+idpiantagione,{
         });
     };
 });
-
 
 
 

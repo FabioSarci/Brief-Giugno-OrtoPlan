@@ -17,8 +17,8 @@ function openLoginModal() {
     document.querySelectorAll('.input-error').forEach(element =>{
         element.classList.remove('input-error');
     })
-    }
-  }
+    };
+}
 
 
 loginForm.addEventListener('submit', async(e) =>{
@@ -46,13 +46,20 @@ loginForm.addEventListener('submit', async(e) =>{
         }
     });
 
-    if(res.status == 422){
+    if(res.status == 422){``
         const el = document.querySelector('#p');
-        const message = {errore : "Credenziali errate!"};
-        setErr(el, JSON.stringify(message.errore));
-        return;
+        const message = "Credenziali errate!";
+        setErr(el,message);
+        return;``
     }
 
+    const notifica = await Notification.requestPermission().then(perm =>{
+        if(perm === 'granted'){
+            const benvenuto = new Notification ('Benvenuto in OrtoPlan!',{
+                icon: '/assets/logo.png',
+            }); 
+        }
+    });
     const data = await res.json();
 
     

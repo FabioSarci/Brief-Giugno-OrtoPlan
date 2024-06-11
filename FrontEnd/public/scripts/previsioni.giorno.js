@@ -140,7 +140,7 @@ function meteo(lat,lon){
             let newDiv = document.createElement('div');
 
             // Aggiungi le classi al div
-            newDiv.className = 'splide__slide border-2 border-accent rounded-xl justify-center lg:max-w-72 max-w-80 p-2';
+            newDiv.className = 'splide__slide border-2 border-accent rounded-xl justify-center bg-white lg:max-w-72 max-w-80 p-2 shadow-2xl';
             // Aggiungi contenuto al div (opzionale)
             newDiv.innerHTML = `
                     <div class='flex lg:flex-col w-full gap-1 lg:gap-0'>
@@ -223,7 +223,7 @@ function attivita(){
                 var inputDate = new Date(attivita.data);
                 if (inputDate >= today) {
                     let newdiv = document.createElement('div');
-                    newdiv.className = 'splide__slide border-2 border-accent rounded-xl justify-center lg:max-w-72 max-w-80 p-2 w-full';
+                    newdiv.className = 'splide__slide border-2 border-accent rounded-xl bg-white     justify-center lg:max-w-72 max-w-80 p-2 w-full shadow-2xl';
                     newdiv.innerHTML = 
                     `
                     <div class='flex lg:flex-col w-full gap-1 lg:gap-0'>
@@ -233,7 +233,7 @@ function attivita(){
                     <div class='flex items-center justify-between'>
                         <p class='lg:text-start text-sm'>${attivita.tipologia}</p>
                         <div class='flex flex-col'>
-                            <p class='text-sm'>${moment(attivita.data).format('DD-MM-YYY')}</p>
+                            <p class='text-sm'>${moment(attivita.data).format('DD-MM-YYYY')}</p>
                             <p class='lg:text-start text-sm'>${attivita.piantagione.nome}</p>
                         </div>
                     </div>
@@ -287,3 +287,73 @@ function checkValidation(validation) {
         p.classList.add('text-red-500','error-message','text-sm','text-sm');
         el.appendChild(p,el.nextSibling)
 }
+
+const repeatList = {
+    '1 Volta al Giorno':1,
+    '1 Volta a Settimana':7,
+    '2 Volte a Settimana':4,
+    '3 Volte a Settimana':3,
+    '4 Volte a Settimana':2,
+    '1 Volta al Mese':30,
+    '2 Volte al Mese':15,
+    '3 Volte al Mese':10,
+    '1 Volta all anno':365,
+};
+
+fetch('http://localhost:8000/attivita-utente/'+userr.id,{
+method:'GET',
+    headers:{
+            "Content-Type": "application/json",
+            authorization: 'Bearer ' + localStorage.getItem('token')
+    },
+})
+.then((res) =>{
+    if (res.status == 401){
+        localStorage.clear();
+        window.location.href = '/OrtoPlan';
+        throw new Error();
+    }
+    return res.json();
+})
+.then((data) =>{
+if(data.length == 0){
+    return
+}else{
+    data.forEach(attivita =>{
+        var today = new Date();
+        today.setHours(0, 0, 0, 0); // Imposta l'orario di oggi a mezzanotte
+        var inputDate = new Date(attivita.data);
+        aumento = repeatList[attivita.ripetizione]
+        console.log(aumento);
+        
+        if(inputDate < today){
+            while(inputDate < today){
+                inputDate = moment(inputDate).add(aumento,'day').toISOString();
+            }
+            console.log(inputDate);
+            fetch('http://localhost:8000/attivita/'+attivita.id,{
+                method:'PUT',
+                headers:{
+                    "Content-Type": "application/json",
+                    authorization: 'Bearer ' + localStorage.getItem('token')
+                },
+                body:JSON.stringify({
+                    inputDate
+                }),
+            })
+            .then((res) =>{
+                if (res.status == 401){
+                    localStorage.clear();
+                    window.location.href = '/OrtoPlan';
+                    throw new Error();
+                }
+                return res.json();
+            })
+            .then((data) =>{
+                console.log(data);
+            })
+        }
+        
+    })
+}
+})

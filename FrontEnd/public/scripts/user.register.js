@@ -4,6 +4,12 @@ function openRegisterModal() {
     registerMod = undefined;
     registerModal.showModal();
     registerForm.reset();
+    document.querySelectorAll('.error-message').forEach(element =>{
+      element.remove();
+    });
+    document.querySelectorAll('.input-error').forEach(element =>{
+      element.classList.remove('input-error');
+    });
 }
 
 const registerForm = document.querySelector('#registerForm');

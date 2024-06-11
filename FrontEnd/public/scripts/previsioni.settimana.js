@@ -43,6 +43,12 @@ cityForm.addEventListener('submit', (e) =>{
         },
     })
     .then((res) =>{
+        if(res.status == 422){
+            const el = document.querySelector('#err');
+            const message = {errore : "Citta non Presente!"};
+            setCityErr(el, JSON.stringify(message.errore));
+            return;
+        }
         return res.json();
     })
     .then((data) =>{
@@ -132,7 +138,7 @@ function meteo(lat,lon){
             // Crea un nuovo div
             let newDiv = document.createElement('div');
             // Aggiungi le classi al div
-            newDiv.className = 'splide__slide border-2 border-accent rounded-xl justify-center p-4';
+            newDiv.className = 'splide__slide border-2 border-accent rounded-xl justify-center p-4 bg-white shaadow-2xl';
             // Aggiungi contenuto al div (opzionale)
             newDiv.innerHTML = `
                     <div class='flex-col w-full gap-1 lg:gap-0'>
@@ -165,3 +171,11 @@ function meteo(lat,lon){
     });
 });
 };
+
+function setCityErr(el,message){
+    el.classList.remove('hidden');
+    const p = document.createElement('p');
+    p.textContent = message;
+    p.classList.add('text-red-500','error-message','text-sm','text-sm');
+    el.appendChild(p,el.nextSibling)
+}
