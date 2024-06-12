@@ -78,12 +78,6 @@ export function updateUserValidation(req, res, next){
         presence: {allowEmpty: false},
         length: {minimum: 5},
     },
-    password: {
-      presence: {allowEmpty: false},
-    },
-    conferma:{
-      equality: 'password'
-    },
     datanascita:{
       datetime:{
         dateOnly: true,

@@ -48,7 +48,6 @@ export default function userRouting(app){
                     lastName : req.body.lastName,
                     datanascita : moment(req.body.datanascita).format(),
                     email : req.body.email,
-                    password : req.body.password,
                 }
             })
 

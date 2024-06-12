@@ -33,9 +33,11 @@ function openProfileModal(){
     document.querySelector('input[name=firstName]').value = userr.firstName;
     document.querySelector('input[name=lastName]').value = userr.lastName;
     document.querySelector('input[name=email]').value = userr.email;
-    document.querySelector('input[name=password]').value = userr.password;
-    document.querySelector('input[name=conferma]').value = userr.password;
     document.querySelector('input[name=datanascita]').value = moment(userr.datanascita).format('YYYY-MM-DD');
+    const password = document.querySelector('input[name=password]');
+    const conferma = document.querySelector('input[name=conferma]');
+    password.classList.add('hidden');
+    conferma.classList.add('hidden');
 };
 
 profileForm.addEventListener('submit', (e) =>{
@@ -51,7 +53,6 @@ profileForm.addEventListener('submit', (e) =>{
     const firstName = e.target[0].value;
     const lastName = e.target[1].value;
     const email = e.target[2].value;
-    const password = e.target[3].value;
     const conferma = e.target[4].value;
     const datanascita = e.target[5].value;
 
@@ -69,7 +70,6 @@ profileForm.addEventListener('submit', (e) =>{
         firstName,
         lastName,
         email,
-        password,
         conferma,
         datanascita
     },
@@ -96,12 +96,6 @@ profileForm.addEventListener('submit', (e) =>{
                 message: 'Non Valida'
             }
         },
-        conferma:{
-            equality:{
-                attribute: "password",
-                message: "Le password devono essere uguali",
-            }
-        },
         datanascita:{
             datetime: {
                 dateOnly: true,
@@ -124,7 +118,6 @@ profileForm.addEventListener('submit', (e) =>{
             firstName,
             lastName,
             email,
-            password,
             datanascita,
         }),
         headers: {
