@@ -379,7 +379,7 @@ fetch('http://localhost:8000/attivita/'+idpiantagione,{
     }else{
         data.forEach(attivita =>{
             activity.push(attivita);
-
+            
             let newdiv = document.createElement('div');
             newdiv.className = 'splide__slide border-2 border-accent rounded-xl justify-center lg:max-w-72 max-w-80 p-2 w-full bg-white shadow-2xl';
             newdiv.innerHTML = 
@@ -405,6 +405,7 @@ fetch('http://localhost:8000/attivita/'+idpiantagione,{
                 document.querySelector('#typeList').value = actMod.tipologia;
                 document.querySelector('#repeatList').value = actMod.ripetizione;
                 document.querySelector('input[name=data]').value = moment(actMod.data).format('YYYY-MM-DD');
+                const attivitaId = actMod.id
             };
 
             padre.appendChild(newdiv);
@@ -423,6 +424,29 @@ fetch('http://localhost:8000/attivita/'+idpiantagione,{
         });
     };
 });
+
+
+function deleteActivity(){
+    fetch('http://localhost:8000/attivita/'+actMod.id ,{
+        method:'DELETE',
+        headers:{
+            "Content-Type": "application/json",
+            authorization: 'Bearer ' + localStorage.getItem('token')
+        },
+    })
+    .then((res) =>{
+        if (res.status == 401){
+            localStorage.clear();
+            window.location.href = '/OrtoPlan';
+            throw new Error();
+        }
+        return res.json();
+    })
+    .then((data) =>{
+        console.log(data);;
+        location.reload();
+    })
+}
 
 
 
@@ -499,3 +523,10 @@ fetch('http://localhost:8000/city',{
             cityInput.appendChild(cityoption);
         });
 });
+
+const deleteActivityModal = document.querySelector('#deleteActivityModal')
+function openDeleteActivityModal(){
+    createActivityModal.close();
+    deleteActivityModal.showModal();
+}
+

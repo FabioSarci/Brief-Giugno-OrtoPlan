@@ -84,7 +84,10 @@
     <!-- modal box -->
     <div class="flex flex-col modal-box gap-4">
         <div class="flex flex-col gap-4">
-            <h3 class="font-bold text-lg text-accent">Nuova Attivita</h3>
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-lg text-accent">Nuova Attivita</h3>
+                <button class="btn btn-accent btn-outline btn-sm" onclick="openDeleteActivityModal()">Elimina</button>
+            </div>
             <form id="createActivityForm" class="flex flex-col gap-4">
                 <input name="nomeAttivita" placeholder="Nome" type="text" class="input input-bordered w-full">
                 <select id="typeList" name="tipologia" placeholder="Tipologia" type="text" class="select select-bordered w-full"> 
@@ -97,6 +100,25 @@
                     <button type="submit" class="btn border-accent text-accent btn-outline">Salva</button>
                 </div>
             </form>
+        </div>
+    </div>
+    <!-- backdrop -->
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>
+
+<!-- eliminaAttivita modal -->
+<dialog id="deleteActivityModal" class="modal">
+    <!-- modal box -->
+    <div class="flex flex-col modal-box gap-4">
+        <div class="flex flex-col gap-4">
+            <h3 class="font-bold text-lg text-accent">Elimina Attivita</h3>
+                <h4>Sei Sicuro di vole Eliminare Questa Attivita?</h4>
+                <div class="modal-action">
+                    <button type="button" class="btn border-accent text-accent btn-outline" onclick="deleteActivityModal.close()">Chiudi</button>
+                    <button type="button" class="btn border-accent text-accent btn-outline" onclick="deleteActivity()">Elimina</button>
+                </div>
         </div>
     </div>
     <!-- backdrop -->

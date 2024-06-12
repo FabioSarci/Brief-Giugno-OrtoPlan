@@ -105,5 +105,23 @@ export default function activityRouting(app){
             }
         });
         res.json(activityList);
-    })
+    });
+
+    app.delete('/attivita/:attivitaid',isLoggedIn, async (req,res) =>{
+        const attivitaId = +req.params.attivitaid;
+
+        const findActivity = await prisma.attivita.findUnique({
+            where:{
+                id: attivitaId,
+            }
+        })
+        if(findActivity){
+            const deletedActivity = await prisma.attivita.delete({
+                where: {
+                    id: attivitaId,
+                }
+            });
+            res.json(deletedActivity);
+        };
+    });
 }
