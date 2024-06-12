@@ -10,9 +10,7 @@ Il progetto sviluppato in poco più di tre settimane è il risultato di un perco
 3. [Installazione](#installazione)
 4. [Utilizzo](#utilizzo)
 5. [Architettura del Progetto](#architettura-del-progetto)
-6. [Contributi](#contributi)
-7. [Licenza](#licenza)
-8. [Ringraziamenti](#ringraziamenti)
+6. [Aggiornamenti Futuri](#aggiornamenti-futuri)
 
 ## Introduzione
 OrtoPlan consiste in una web app, che mira ad essere un supporto per la gestione di uno o più orti personali.
@@ -62,13 +60,14 @@ FrontEnd:
 ## Utilizzo
 
 Come avviare il progetto:
+
     Avviare il BackEnd:
         cd BackEnd
         npm run dev
         <!-- Gira sulla porta 8000 -->
 
     Avviare il FrontEnd:
-        cd BackEnd
+        cd FrontEnd
         npm run dev
         npm run tw
         <!-- Gira sulla porta 3000 -->
