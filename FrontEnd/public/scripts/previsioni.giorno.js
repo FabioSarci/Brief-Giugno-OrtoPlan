@@ -223,23 +223,23 @@ function attivita(){
                 var inputDate = new Date(attivita.data);
                 if (inputDate >= today) {
                     let newdiv = document.createElement('div');
-                    newdiv.className = 'splide__slide border-2 border-accent rounded-xl bg-white     justify-center lg:max-w-72 max-w-80 p-2 w-full shadow-2xl';
+                    newdiv.className = 'splide__slide border-2 border-accent rounded-xl bg-white  justify-center lg:max-w-72 max-w-80 p-2 w-full shadow-2xl';
                     newdiv.innerHTML = 
                     `
-                    <div class='flex lg:flex-col w-full gap-1 lg:gap-0'>
-                    <div class='flex justify-between items-center lg:border-b lg:border-b-accent lg:pb-2 gap-1'>
-                        <p class='lg:text-xl'>${attivita.nome}</p>
-                    </div>
-                    <div class='flex items-center justify-between'>
-                        <p class='lg:text-start text-sm'>${attivita.tipologia}</p>
-                        <div class='flex flex-col'>
-                            <p class='text-sm'>${moment(attivita.data).format('DD-MM-YYYY')}</p>
-                            <p class='lg:text-start text-sm'>${attivita.piantagione.nome}</p>
+                    <div class='flex flex-col w-full gap-1 lg:gap-0'>
+                        <div class='flex justify-between items-center border-b border-b-accent pb-2 gap-1'>
+                            <p class='lg:text-xl'>${attivita.nome}</p>
                         </div>
-                    </div>
-                    <div class='flex justify-between items-center'>
-                        <p class=' text-2xl'>${attivita.ripetizione}</p>
-                    </div>
+                        <div class='flex items-center justify-between'>
+                            <p class='lg:text-start text-sm'>${attivita.tipologia}</p>
+                            <div class='flex flex-col'>
+                                <p class='text-sm'>${moment(attivita.data).format('DD-MM-YYYY')}</p>
+                                <p class='lg:text-start text-sm'>${attivita.piantagione.nome}</p>
+                            </div>
+                        </div>
+                        <div class='flex justify-between items-center'>
+                            <p class=' text-2xl'>${attivita.ripetizione}</p>
+                        </div>
                     </div>
                     `;
                     padre.appendChild(newdiv);
